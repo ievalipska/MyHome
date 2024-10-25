@@ -24,34 +24,28 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * Is an entry point for Spring Boot application. It enables auto-configuration and
- * property scanning and provides a bean definition for password encoding using BCrypt
- * algorithm. The class serves as the primary configuration class for the Spring Boot
- * application.
+ * Defines a Spring Boot application with configuration properties scanning enabled.
  */
 @SpringBootApplication
 @ConfigurationPropertiesScan
 public class MyHomeServiceApplication {
 
   /**
-   * Initializes and runs a Spring-based application instance by calling the `run`
-   * method of `SpringApplication`. This method starts the application's embedded web
-   * server and initializes its dependencies. The `MyHomeServiceApplication` class is
-   * passed as an argument to specify the main application configuration.
+   * Runs the Spring Boot application. It starts the application by calling
+   * `SpringApplication.run`, passing the `MyHomeServiceApplication` class and command-line
+   * arguments. The application is then executed, initializing and configuring its components.
    *
-   * @param args array of command-line arguments passed to the Spring Boot application
-   * when it is launched.
+   * @param args command-line arguments passed to the application.
    */
   public static void main(String[] args) {
     SpringApplication.run(MyHomeServiceApplication.class, args);
   }
 
   /**
-   * Returns an instance of a `BCryptPasswordEncoder`, which is a password encoder used
-   * to store and verify passwords securely. It uses the Blowfish encryption algorithm
-   * with a work factor, providing strong password hashing and salting capabilities.
+   * Returns a `PasswordEncoder` instance, specifically a `BCryptPasswordEncoder`, which
+   * is used to securely hash and verify passwords.
    *
-   * @returns an instance of a BCrypt password encoder.
+   * @returns an instance of `BCryptPasswordEncoder`.
    */
   @Bean
   public PasswordEncoder getPasswordEncoder() {

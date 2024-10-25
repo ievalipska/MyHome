@@ -17,8 +17,8 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 /**
- * Is a unit test for the authentication functionality in the system. It tests the
- * login process and verifies the expected response headers and status code.
+ * Is a unit test class designed to verify the functionality of the AuthenticationController
+ * class. It uses Mockito for mocking dependencies and JUnit for testing.
  */
 public class AuthenticationControllerTest {
 
@@ -33,9 +33,9 @@ public class AuthenticationControllerTest {
   private AuthenticationController authenticationController;
 
   /**
-   * Initializes mock objects for the current test class using MockitoAnnotations. This
-   * is a common setup step for JUnit tests that use Mockito for mocking dependencies.
-   * The function enables the testing framework to create mock instances for dependencies.
+   * Initializes Mockito annotations for the test class, enabling mock objects to be
+   * created automatically. This function is annotated with `@BeforeEach`, indicating
+   * it runs before each test method in the class.
    */
   @BeforeEach
   private void init() {
@@ -43,9 +43,9 @@ public class AuthenticationControllerTest {
   }
 
   /**
-   * Simulates a successful login process by sending a `LoginRequest` to an authentication
-   * controller, which returns a response with OK status and headers containing a user
-   * ID and JWT token. The response is then verified for correctness.
+   * Tests the login functionality of an authentication controller. It sends a login
+   * request, verifies the response status code and headers, and checks that the
+   * authentication service is called correctly.
    */
   @Test
   void loginSuccess() {
@@ -69,22 +69,23 @@ public class AuthenticationControllerTest {
   }
 
   /**
-   * Returns an instance of `LoginRequest`. It initializes a `LoginRequest` object with
-   * default email and password values, TEST_EMAIL and TEST_PASSWORD respectively. The
-   * created object represents a default login request for the application.
+   * Returns a pre-configured `LoginRequest` object with the email address `TEST_EMAIL`
+   * and password `TEST_PASSWORD`. The function creates a new instance of `LoginRequest`
+   * and sets its email and password properties using the `email` and `password` methods.
    *
-   * @returns a `LoginRequest` object with email and password set.
+   * @returns a `LoginRequest` object with email `TEST_EMAIL` and password `TEST_PASSWORD`.
    */
   private LoginRequest getDefaultLoginRequest() {
     return new LoginRequest().email(TEST_EMAIL).password(TEST_PASSWORD);
   }
 
   /**
-   * Creates and returns an instance of `AuthenticationData`. It initializes the instance
-   * with a token named `TOKEN` and a test ID. The resulting object represents default
-   * authentication data for use in the application.
+   * Returns an instance of `AuthenticationData` with a token named `TOKEN` and a test
+   * ID named `TEST_ID`. This instance represents default authentication data. The
+   * function creates a new instance every time it is called.
    *
-   * @returns an instance of `AuthenticationData`.
+   * @returns an instance of `AuthenticationData` with `TOKEN` as its type and `TEST_ID`
+   * as its value.
    */
   private AuthenticationData getDefaultAuthenticationData() {
     return new AuthenticationData(TOKEN, TEST_ID);

@@ -27,7 +27,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
- * Defines a Spring Data JPA repository for managing CommunityHouse entities.
+ * Extends the PagingAndSortingRepository to manage CommunityHouse entities, providing
+ * various methods for retrieving and deleting data.
  */
 @Repository
 public interface CommunityHouseRepository extends PagingAndSortingRepository<CommunityHouse, Long> {

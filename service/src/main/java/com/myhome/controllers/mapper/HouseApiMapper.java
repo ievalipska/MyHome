@@ -22,8 +22,8 @@ import java.util.Set;
 import org.mapstruct.Mapper;
 
 /**
- * Provides mapping functionality between CommunityHouse domain objects and their
- * corresponding Rest API response objects.
+ * Is a mapping interface that converts CommunityHouse domain objects to
+ * GetHouseDetailsResponseCommunityHouse API response objects.
  */
 @Mapper
 public interface HouseApiMapper {

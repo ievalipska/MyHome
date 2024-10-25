@@ -11,10 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Handles authentication requests by validating login credentials and returning a
- * response with authentication tokens. It relies on the AuthenticationService to
- * perform the actual authentication logic. The controller implements the AuthenticationApi
- * interface.
+ * Handles authentication requests by implementing the AuthenticationApi interface.
+ * It provides a login endpoint to authenticate users and returns a successful response
+ * with user ID and JWT token headers.
  */
 @RequiredArgsConstructor
 @RestController
@@ -23,12 +22,15 @@ public class AuthenticationController implements AuthenticationApi {
   private final AuthenticationService authenticationService;
 
   /**
-   * Handles a login request by calling the `authenticationService` to authenticate the
-   * user and returns a successful response with authentication headers.
+   * Handles user authentication by calling the `login` method of the `authenticationService`
+   * with the provided `loginRequest`.
+   * It then returns a successful HTTP response with authentication headers based on
+   * the authentication data.
    *
-   * @param loginRequest login credentials submitted by the user.
+   * @param loginRequest request data for the login operation, which is validated and
+   * then passed to the `authenticationService` for authentication.
    *
-   * @returns a ResponseEntity containing an HTTP OK status code with custom headers.
+   * @returns a ResponseEntity with HTTP status 200 OK and custom headers.
    */
   @Override
   public ResponseEntity<Void> login(@Valid LoginRequest loginRequest) {
@@ -39,15 +41,15 @@ public class AuthenticationController implements AuthenticationApi {
   }
 
   /**
-   * Constructs HttpHeaders objects with userId and JWT token from AuthenticationData,
-   * enabling secure login requests. The function creates a new HttpHeaders instance,
-   * adds userId and JWT token, and returns the resulting HttpHeaders object. It is
-   * likely used for API authentication.
+   * Constructs a set of HTTP headers containing user ID and JWT token, which can be
+   * used for authentication purposes. It takes an `AuthenticationData` object as input
+   * and returns a `HttpHeaders` object. The function uses the user ID and JWT token
+   * from the input object to populate the headers.
    *
-   * @param authenticationData authentication data containing the user ID and JWT token,
-   * which are used to construct the HTTP headers.
+   * @param authenticationData authentication data used to populate the HTTP headers
+   * with a user ID and JWT token.
    *
-   * @returns a HttpHeaders object with userId and token headers.
+   * @returns a HttpHeaders object containing a userId and a token.
    */
   private HttpHeaders createLoginHeaders(AuthenticationData authenticationData) {
     final HttpHeaders httpHeaders = new HttpHeaders();

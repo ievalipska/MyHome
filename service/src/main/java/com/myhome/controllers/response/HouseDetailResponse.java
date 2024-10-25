@@ -22,9 +22,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Is a data transfer object for encapsulating house details information.
+ * Represents a response object containing information about a house in the format
+ * of a CommunityHouseDto.
  *
- * - house (CommunityHouseDto): is a private field of type CommunityHouseDto.
+ * - house (CommunityHouseDto): holds a CommunityHouseDto object.
  */
 @NoArgsConstructor
 @AllArgsConstructor

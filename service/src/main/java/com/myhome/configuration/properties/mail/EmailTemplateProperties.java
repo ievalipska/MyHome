@@ -6,15 +6,15 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
- * Is a configuration class that holds email template properties.
+ * Represents configuration properties for email templates.
  *
  * - path (String): stores a string representing a path.
  *
- * - format (String): represents a string value specifying the format.
+ * - format (String): Stores the format of email templates.
  *
- * - encoding (String): stores the encoding type.
+ * - encoding (String): represents the character encoding used for the email template.
  *
- * - mode (String): specifies a mode.
+ * - mode (String): represents a string value.
  *
  * - cache (boolean): is a boolean flag indicating whether caching is enabled.
  */

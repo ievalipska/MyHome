@@ -22,7 +22,8 @@ import java.util.Set;
 import org.mapstruct.Mapper;
 
 /**
- * Maps HouseMember and HouseMemberDto objects to each other for data transfer.
+ * Provides mappings between HouseMember domain objects and their corresponding data
+ * transfer objects.
  */
 @Mapper
 public interface HouseMemberMapper {

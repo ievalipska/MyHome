@@ -5,11 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * Is a custom exception class that represents authentication-related errors, inheriting
- * from the RuntimeException class.
+ * Represents a custom exception for authentication failures, extending the
+ * RuntimeException with a predefined error message and HTTP status code of 401 Unauthorized.
  *
- * - ERROR_MESSAGE (String): contains a predefined error message indicating incorrect
- * credentials or a non-existent user.
+ * - ERROR_MESSAGE (String): contains a predefined error message.
  */
 @Slf4j
 @ResponseStatus(value = HttpStatus.UNAUTHORIZED)

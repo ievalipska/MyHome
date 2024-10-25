@@ -26,8 +26,8 @@ import java.util.Set;
 import org.springframework.data.domain.Pageable;
 
 /**
- * Provides various operations for managing communities, community houses, and user
- * roles within a community in a social network application.
+ * Defines a contract for managing communities, allowing for CRUD operations, community
+ * administration, and house management.
  */
 public interface CommunityService {
   Community createCommunity(CommunityDto communityDto);

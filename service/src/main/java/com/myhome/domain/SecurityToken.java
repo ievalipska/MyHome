@@ -13,21 +13,21 @@ import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
 /**
- * Represents a security token entity with attributes for token type, token value,
- * creation and expiry dates, and association with a User entity.
+ * Represents a security token with its type, unique identifier, creation and expiry
+ * dates, usage status, and association with a user.
  *
  * - tokenType (SecurityTokenType): represents the type of security token.
  *
- * - token (String): is a unique, non-null string representing a security token.
+ * - token (String): is a unique string identifier for the SecurityToken.
  *
- * - creationDate (LocalDate): represents the date when the security token was created.
+ * - creationDate (LocalDate): stores the date on which the security token was created.
  *
- * - expiryDate (LocalDate): represents the date when the security token expires.
+ * - expiryDate (LocalDate): represents the date when a security token expires.
  *
- * - isUsed (boolean): represents a boolean state indicating whether the security
- * token has been used or not.
+ * - isUsed (boolean): represents a boolean status indicating whether a security token
+ * has been used.
  *
- * - tokenOwner (User): is a reference to a User entity.
+ * - tokenOwner (User): represents a User.
  */
 @Entity
 @Data

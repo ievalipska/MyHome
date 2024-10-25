@@ -23,24 +23,24 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Represents a data transfer object for payment information, encapsulating key
- * attributes and relationships with other entities.
+ * Represents a data transfer object for payment information, encapsulating relevant
+ * details in a structured format.
  *
- * - paymentId (String): stores a unique identifier for a payment.
+ * - paymentId (String): is a string representing an identifier.
  *
- * - charge (BigDecimal): is a monetary value represented as a BigDecimal.
+ * - charge (BigDecimal): represents a monetary amount.
  *
  * - type (String): represents the type of payment.
  *
- * - description (String): stores a string.
+ * - description (String): stores a string of text.
  *
- * - recurring (boolean): indicates whether a payment is recurring or not.
+ * - recurring (boolean): indicates whether a payment is recurring.
  *
- * - dueDate (String): represents a date.
+ * - dueDate (String): stores a date.
  *
- * - admin (UserDto): represents a UserDto object.
+ * - admin (UserDto): represents a UserDto.
  *
- * - member (HouseMemberDto): represents a HouseMemberDto.
+ * - member (HouseMemberDto): represents a HouseMemberDto object.
  */
 @Builder
 @Getter

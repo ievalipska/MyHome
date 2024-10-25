@@ -20,8 +20,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * Defines a data access layer for managing Payment entities in a database, providing
- * methods for querying and deleting payment records by their unique ID.
+ * Defines a data access layer for managing Payment entities using Spring Data JPA.
  */
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
   Optional<Payment> findByPaymentId(String paymentId);

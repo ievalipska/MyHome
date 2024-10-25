@@ -31,11 +31,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 /**
- * Implements an authorization filter that verifies authentication tokens in HTTP requests.
- * It uses environment properties to determine the token header name and prefix, then
- * extracts and decodes the token using an encoder-decoder service.
- * If the token is valid, it sets the corresponding authentication object in the
- * security context.
+ * Extends the BasicAuthenticationFilter class to enable authentication filtering for
+ * incoming HTTP requests, primarily using JSON Web Tokens (JWT).
  */
 public class MyHomeAuthorizationFilter extends BasicAuthenticationFilter {
 
@@ -52,32 +49,30 @@ public class MyHomeAuthorizationFilter extends BasicAuthenticationFilter {
   }
 
   /**
-   * Authenticates incoming requests by checking a custom authorization header.
-   * It skips authentication if the header is missing or does not match the expected prefix.
-   * If authentication is successful, it sets the security context and allows the request
-   * to proceed.
+   * Verifies the presence and validity of an authorization token in the HTTP request
+   * headers. If the token is valid, it sets the authentication context and proceeds
+   * with the filter chain; otherwise, it skips authentication and continues with the
+   * chain.
    *
-   * @param request HttpServletRequest object that is being processed by the filter.
+   * @param request HttpServletRequest object that contains the HTTP request data,
+   * including headers and parameters.
    *
-   * Pass a `HttpServletRequest` object with several key properties including
-   * - getHeader(String name) to retrieve HTTP headers by name
-   * - getProperty(String name) is not applicable for HttpServletRequest; used here
-   * from an external environment.
+   * Exposes the HTTP headers, such as `authHeaderName`, and provides access to the
+   * HTTP request parameters and attributes.
    *
-   * @param response HttpServletResponse object that contains the HTTP response sent
-   * to the client and is passed through the filter chain but not modified within the
-   * function.
+   * @param response HTTP response sent to the client.
    *
-   * Send response headers and send response body if appropriate to output stream.
+   * Include.
+   * It is an instance of `HttpServletResponse` with the following properties:
+   * - `ServletResponse` interface methods
+   * - `ServletResponseWrapper` methods
+   * - `httpServletResponse` object with properties such as `status`, `outputStream`,
+   * `writer`
    *
-   * @param chain sequence of filters that are to be executed after authentication has
-   * been successfully completed or when it is not required.
+   * @param chain sequence of filters that will be executed after the current filter.
    *
-   * * chain: an object implementing FilterChain interface, containing a list of filters
-   * to be executed.
-   *     Properties:
-   *       - FilterChain filterChain;
-   *       - List<Filter> filters.
+   * Passed as a parameter, `chain` is an instance of `FilterChain` interface, which
+   * extends `Chain` interface.
    */
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
@@ -97,23 +92,25 @@ public class MyHomeAuthorizationFilter extends BasicAuthenticationFilter {
   }
 
   /**
-   * Authenticates a user by retrieving an authorization token from the HTTP request
-   * header, decodes and verifies it, and returns a UsernamePasswordAuthenticationToken
-   * if valid with the decoded user ID as its principal. It returns null otherwise.
-   * Authentication involves token validation against a secret key.
+   * Validates an authentication token in the HTTP request header, decodes the token
+   * using a secret key, and returns a `UsernamePasswordAuthenticationToken` object if
+   * the token is valid and contains a user ID.
    *
-   * @param request HTTP request object from which an authentication token is extracted
-   * to perform authentication and verification.
+   * @param request HTTP request object from which the authentication token is extracted.
    *
-   * Get its `header` property to obtain the HTTP request headers as a `Map<String, String>`.
+   * Obtain the value of the HTTP request header with the specified name.
+   * Retrieve the value of the HTTP request header with the specified name if it exists,
+   * otherwise return null.
+   * Extract the token value from the obtained header value by removing the specified
+   * prefix.
+   * Decode the token using the specified secret key.
    *
-   * This map contains various HTTP header names and values.
+   * @returns a `UsernamePasswordAuthenticationToken` containing a user ID or null if
+   * authentication fails.
    *
-   * @returns a `UsernamePasswordAuthenticationToken` object or null.
-   *
-   * The `UsernamePasswordAuthenticationToken` object has two main attributes. It is
-   * constructed with `jwt.getUserId()` as its principal and an empty collection as its
-   * authorities. The token's password attribute is set to null.
+   * The output is a `UsernamePasswordAuthenticationToken` object. It has a `principal`
+   * property, which is the user ID in this case, and an `authenticated` property, which
+   * is `false` by default.
    */
   private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
     String authHeader =

@@ -13,7 +13,7 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 import java.util.Locale;
 
 /**
- * Configures email template settings for a Spring application using Thymeleaf.
+ * Configures Email Template Engine for Thymeleaf template rendering.
  */
 @Configuration
 @RequiredArgsConstructor
@@ -23,13 +23,11 @@ public class EmailTemplateConfig {
   private final EmailTemplateLocalizationProperties localizationProperties;
 
   /**
-   * Configures and returns a ResourceBundleMessageSource bean for internationalized
-   * email messages.
-   * It loads messages from a resource bundle based on properties from the
-   * localizationProperties object.
-   * It sets the default locale, encoding, and cache seconds accordingly.
+   * Configures and returns a `ResourceBundleMessageSource` instance, which is a bean
+   * used to retrieve localized messages from a resource bundle. It sets the base name,
+   * default locale, encoding, and cache seconds based on the provided properties.
    *
-   * @returns a `ResourceBundleMessageSource` instance configured with specified properties.
+   * @returns a ResourceBundleMessageSource object configured with specified properties.
    */
   @Bean
   public ResourceBundleMessageSource emailMessageSource() {
@@ -42,15 +40,14 @@ public class EmailTemplateConfig {
   }
 
   /**
-   * Configures a SpringTemplateEngine instance with a Thymeleaf template resolver and
-   * sets the message source for the template engine to the provided ResourceBundleMessageSource
-   * instance.
+   * Configures and returns a SpringTemplateEngine instance, initializing it with a
+   * Thymeleaf template resolver and a ResourceBundleMessageSource for email message resolution.
    *
-   * @param emailMessageSource source of message values for the SpringTemplateEngine,
-   * allowing it to resolve messages in Thymeleaf templates.
+   * @param emailMessageSource source of messages to be used for resolving messages in
+   * the template engine.
    *
-   * @returns a SpringTemplateEngine object configured with a template resolver and
-   * message source.
+   * @returns a SpringTemplateEngine instance configured with a Thymeleaf template
+   * resolver and email message source.
    */
   @Bean
   public SpringTemplateEngine thymeleafTemplateEngine(ResourceBundleMessageSource emailMessageSource) {
@@ -61,16 +58,18 @@ public class EmailTemplateConfig {
   }
 
   /**
-   * Configures a ClassLoaderTemplateResolver for Thymeleaf templates, setting properties
-   * such as prefix, suffix, template mode, character encoding, and cacheability based
-   * on provided template properties.
+   * Configures a Thymeleaf template resolver, setting its prefix, suffix, template
+   * mode, character encoding, and cacheability based on properties from the
+   * `templateProperties` object.
    *
-   * @returns a Thymeleaf template resolver object configured with specified properties.
+   * @returns a configured Thymeleaf template resolver object.
    *
-   * It is an instance of `ClassLoaderTemplateResolver`, a Thymeleaf template resolver.
-   * It has a prefix set to the template path, possibly appended with a file separator.
-   * Its suffix, template mode, character encoding, and cacheability are determined by
-   * the `templateProperties`.
+   * Set to prefix the template path with the file separator if it does not already end
+   * with one.
+   * Set to suffix the template with the specified format.
+   * Set to template mode to the specified mode.
+   * Set to character encoding to the specified encoding.
+   * Set to cacheable to the specified cache value.
    */
   private ITemplateResolver thymeleafTemplateResolver() {
     ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();

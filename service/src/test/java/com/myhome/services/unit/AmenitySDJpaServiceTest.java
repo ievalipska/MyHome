@@ -49,8 +49,9 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 /**
- * This class is a unit test for the AmenitySDJpaService class, testing its various
- * methods for deleting, listing, adding, and updating amenities.
+ * This class contains a series of JUnit tests for the AmenitySDJpaService class,
+ * covering various scenarios such as deleting amenities, listing amenities, adding
+ * amenities to communities, and updating community amenities.
  */
 class AmenitySDJpaServiceTest {
 
@@ -73,8 +74,9 @@ class AmenitySDJpaServiceTest {
   private AmenitySDJpaService amenitySDJpaService;
 
   /**
-   * Initializes Mockito annotations for the current test class, setting up mock objects
-   * for dependency injection.
+   * Initializes Mockito annotations for the test class, enabling mock object creation
+   * and setup for each test method. It is executed before each test method, ensuring
+   * a fresh state for each test. MockitoAnnotations are initialized on the current object.
    */
   @BeforeEach
   private void init() {
@@ -82,9 +84,9 @@ class AmenitySDJpaServiceTest {
   }
 
   /**
-   * Tests the deletion of an amenity from the database by a service. It verifies that
-   * the amenity is successfully deleted and that the repository is called correctly
-   * to find and delete the amenity.
+   * Tests the deletion of an amenity by an entity service. It verifies that the amenity
+   * is successfully deleted and that the repository is called to retrieve and delete
+   * the amenity.
    */
   @Test
   void deleteAmenity() {
@@ -105,9 +107,10 @@ class AmenitySDJpaServiceTest {
   }
 
   /**
-   * Tests the deletion of a non-existent amenity. It checks if the service returns
-   * false when trying to delete an amenity that does not exist in the repository. The
-   * service is expected to not call the delete method on the repository.
+   * Tests the deletion of an amenity that does not exist in the database. It checks
+   * if the `amenitySDJpaService` returns false when deleting a non-existent amenity,
+   * and verifies that the repository is called to check for the amenity's existence
+   * but not to delete it.
    */
   @Test
   void deleteAmenityNotExists() {
@@ -125,9 +128,9 @@ class AmenitySDJpaServiceTest {
   }
 
   /**
-   * Retrieves a set of amenities for a specified community ID by calling the community
-   * repository's `findByCommunityIdWithAmenities` method, and returns the result as a
-   * set of amenities.
+   * Retrieves a set of all amenities associated with a community with a specified ID.
+   * It uses a repository to find the community and its amenities, then returns the
+   * amenities. The function is tested using a mock repository and assertions.
    */
   @Test
   void listAllAmenities() {
@@ -148,9 +151,10 @@ class AmenitySDJpaServiceTest {
   }
 
   /**
-   * Tests the behavior of the `amenitySDJpaService` when it is given a community ID
-   * that does not have any amenities associated with it. It verifies that an empty set
-   * of amenities is returned.
+   * Tests the retrieval of amenities for a community with an ID that does not exist,
+   * resulting in an empty set of amenities. It verifies the repository call and checks
+   * for an empty set of amenities as the expected result. The function ensures the
+   * service handles non-existent community IDs correctly.
    */
   @Test
   void listAllAmenitiesNotExists() {
@@ -167,9 +171,9 @@ class AmenitySDJpaServiceTest {
   }
 
   /**
-   * Tests the functionality of adding an amenity to an existing community. It involves
-   * creating a community and an amenity, mapping the amenity to a data transfer object,
-   * and then verifying that the amenity is successfully added to the community.
+   * Tests the creation of amenities for an existing community. It verifies that an
+   * amenity is successfully added to the community's amenities when a valid request
+   * is made.
    */
   @Test
   void shouldAddAmenityToExistingCommunity() {
@@ -211,8 +215,9 @@ class AmenitySDJpaServiceTest {
   }
 
   /**
-   * Tests the creation of amenities for a non-existent community by verifying that an
-   * empty result is returned and interactions with the community service are performed.
+   * Tests the functionality of creating amenities for a non-existent community. It
+   * checks that the `createAmenities` service returns an empty result when attempting
+   * to add amenities to a community that does not exist.
    */
   @Test
   void shouldFailOnAddAmenityToNotExistingCommunity() {
@@ -240,9 +245,9 @@ class AmenitySDJpaServiceTest {
   }
 
   /**
-   * Tests the update functionality of community amenities by verifying that the
-   * `updateAmenity` method of `amenitySDJpaService` successfully updates the amenity
-   * and saves it to the database.
+   * Tests the update functionality of an amenity in a community. It sets up test data,
+   * calls the `updateAmenity` service method, and verifies that the amenity is saved
+   * successfully.
    */
   @Test
   void shouldUpdateCommunityAmenitySuccessfully() {
@@ -271,9 +276,9 @@ class AmenitySDJpaServiceTest {
   }
 
   /**
-   * Tests the update functionality of a community amenity service when the amenity
-   * does not exist. It verifies that the service returns false and does not save the
-   * updated amenity.
+   * Tests the behavior of the `amenitySDJpaService` when attempting to update a community
+   * amenity that does not exist. It verifies that the service returns false and does
+   * not save any data.
    */
   @Test
   void shouldNotUpdateCommunityAmenitySuccessfullyIfAmenityNotExists() {
@@ -291,9 +296,8 @@ class AmenitySDJpaServiceTest {
   }
 
   /**
-   * Tests the functionality of updating a community amenity when the save operation
-   * fails. It checks that the update operation returns false when the amenity repository's
-   * save method returns null.
+   * Tests the behavior of updating a community amenity when saving fails. It verifies
+   * that the service returns false when an amenity cannot be saved to the repository.
    */
   @Test
   void shouldNotUpdateCommunityAmenitySuccessfullyIfSavingFails() {
@@ -322,10 +326,9 @@ class AmenitySDJpaServiceTest {
   }
 
   /**
-   * Tests that an amenity is not updated if the associated community does not exist.
-   * It uses a test service to update an amenity and verifies that the update was not
-   * successful and that the community repository was called to check for the community's
-   * existence.
+   * Tests the functionality of updating an amenity when the community associated with
+   * it does not exist. It simulates a scenario where the community repository returns
+   * an empty optional, causing the update to fail.
    */
   @Test
   void shouldNotUpdateAmenityIfCommunityDoesNotExist() {
@@ -350,14 +353,13 @@ class AmenitySDJpaServiceTest {
   }
 
   /**
-   * Creates and returns an instance of `AmenityDto` with predefined attributes.
-   * The `AmenityDto` instance is initialized with values from constants.
+   * Creates a new instance of `AmenityDto` and populates its properties with predefined
+   * test data, including `id`, `amenityId`, `name`, `description`, `price`, and `communityId`.
    *
-   * @returns an `AmenityDto` object with predefined properties.
+   * @returns an instance of `AmenityDto` with specified attributes.
    *
-   * The returned output is an instance of `AmenityDto` with the following properties:
-   * id of type Long, amenityId of unspecified type, name of unspecified type, description
-   * of unspecified type, price of unspecified type, and communityId of unspecified type.
+   * The returned object has an `id` property, an `amenityId` property, a `name` property,
+   * a `description` property, a `price` property, and a `communityId` property.
    */
   private AmenityDto getTestAmenityDto() {
     Long TEST_AMENITY_ENTITY_ID = 1L;
@@ -372,12 +374,11 @@ class AmenitySDJpaServiceTest {
   }
 
   /**
-   * Returns an updated `Amenity` object based on the data from a `communityAmenityDto`
-   * object, with the community set to a test community. The function initializes an
-   * `Amenity` object and sets its properties using the data from the `communityAmenityDto`
-   * object.
+   * Constructs an `Amenity` object from a `communityAmenityDto` and populates it with
+   * the amenity's ID, name, price, and description. The community for this amenity is
+   * set to a test community.
    *
-   * @returns an `Amenity` object with specified attributes, including an associated community.
+   * @returns an `Amenity` object with specified attributes populated from the `communityAmenityDto`.
    */
   private Amenity getUpdatedCommunityAmenity() {
     AmenityDto communityAmenityDto = getTestAmenityDto();

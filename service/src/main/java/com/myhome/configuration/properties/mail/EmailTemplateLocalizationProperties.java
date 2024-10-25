@@ -6,13 +6,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
- * Represents configuration properties for email template localization.
+ * Is a Spring Boot configuration class for email template localization properties.
  *
- * - path (String): stores a string representing a path.
+ * - path (String): stores a string path.
  *
- * - encoding (String): specifies the encoding of email templates.
+ * - encoding (String): specifies the character encoding used for email templates.
  *
- * - cacheSeconds (int): represents a cache expiration time in seconds.
+ * - cacheSeconds (int): stores an integer value.
  */
 @Data
 @Component

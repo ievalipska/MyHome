@@ -25,12 +25,12 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
- * Represents a document associated with a house member, inheriting properties from
- * the BaseEntity.
+ * Represents a database entity for storing house member documents with a unique
+ * filename and binary content.
  *
- * - documentFilename (String): is a unique string representing the filename of a document.
+ * - documentFilename (String): stores a unique document filename.
  *
- * - documentContent (byte[]): stores binary content of a document.
+ * - documentContent (byte[]): stores a binary array.
  */
 @Entity
 @AllArgsConstructor

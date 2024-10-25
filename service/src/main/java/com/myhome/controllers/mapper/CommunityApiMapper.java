@@ -31,8 +31,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 /**
- * Provides a mapping between domain objects and API response objects using the
- * MapStruct library.
+ * Provides a mapping between domain objects and data transfer objects for community-related
+ * data.
  */
 @Mapper
 public interface CommunityApiMapper {

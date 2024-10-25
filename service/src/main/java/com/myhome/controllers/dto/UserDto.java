@@ -22,24 +22,24 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Represents a data transfer object for user information, encapsulating essential
- * user attributes.
+ * Represents a data transfer object for user information, encapsulating user attributes
+ * and their respective data types.
  *
- * - id (Long): is a unique identifier for a user.
+ * - id (Long): is a unique identifier of type Long for a user.
  *
- * - userId (String): stores a unique identifier for a user.
+ * - userId (String): is a unique identifier for a user.
  *
- * - name (String): Represents the user's full name.
+ * - name (String): Contains a user's name.
  *
  * - email (String): stores a user's email address.
  *
- * - password (String): stores a user's password.
+ * - password (String): is a plain text password.
  *
- * - encryptedPassword (String): Stores an encrypted password.
+ * - encryptedPassword (String): stores a user's encrypted password.
  *
- * - communityIds (Set<String>): stores a set of community IDs as strings.
+ * - communityIds (Set<String>): holds a collection of community IDs.
  *
- * - emailConfirmed (boolean): indicates whether the user's email address has been confirmed.
+ * - emailConfirmed (boolean): indicates if the user's email address has been confirmed.
  */
 @Builder
 @Getter

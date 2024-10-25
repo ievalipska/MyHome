@@ -23,8 +23,8 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * Provides methods for creating, retrieving, deleting, and updating amenities within
- * a community.
+ * Provides methods for managing amenities in a community, including creation,
+ * retrieval, deletion, listing, and updating of amenities.
  */
 public interface AmenityService {
 

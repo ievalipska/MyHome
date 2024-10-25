@@ -7,14 +7,13 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.Email;
 
 /**
- * Represents a request object for handling password reset operations, encapsulating
- * user email, token, and new password details.
+ * Represents a data model for a password recovery request.
  *
- * - email (String): is an email address.
+ * - email (String): is annotated with @Email for validation.
  *
- * - token (String): is a string.
+ * - token (String): is a string field.
  *
- * - newPassword (String): is the new password to be set.
+ * - newPassword (String): is a string to store a new password.
  */
 @AllArgsConstructor
 @NoArgsConstructor

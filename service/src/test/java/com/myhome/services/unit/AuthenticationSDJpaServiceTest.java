@@ -25,8 +25,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 /**
- * Provides unit tests for the AuthenticationSDJpaService class, testing successful
- * login, login with non-existent user, and login with incorrect credentials.
+ * Provides unit tests for the AuthenticationSDJpaService class, covering successful
+ * login, user not found, and incorrect credentials scenarios.
  */
 public class AuthenticationSDJpaServiceTest {
 
@@ -49,9 +49,9 @@ public class AuthenticationSDJpaServiceTest {
           passwordEncoder);
 
   /**
-   * Tests the successful authentication process. It verifies that a user can log in
-   * with valid credentials and receive a JWT token, and it checks that the correct
-   * services are called during the authentication process.
+   * Verifies a successful login process. It simulates a valid user login by encoding
+   * a JWT token and authenticating the user's credentials. The test asserts that the
+   * login service returns the user's ID and the encoded JWT token.
    */
   @Test
   void loginSuccess() {
@@ -80,9 +80,10 @@ public class AuthenticationSDJpaServiceTest {
   }
 
   /**
-   * Tests the functionality of logging in a user when the user is not found in the
-   * database. It simulates a scenario where the user's email is not recognized, resulting
-   * in a `UserNotFoundException`.
+   * Tests the login functionality when a user with the provided email is not found in
+   * the database.
+   * It checks if a `UserNotFoundException` is thrown when the `login` method is called.
+   * The test simulates a scenario where the user does not exist.
    */
   @Test
   void loginUserNotFound() {
@@ -97,9 +98,10 @@ public class AuthenticationSDJpaServiceTest {
   }
 
   /**
-   * Tests the authentication service's handling of incorrect login credentials. It
-   * simulates a user with a valid email address but an incorrect password, then verifies
-   * that a `CredentialsIncorrectException` is thrown.
+   * Tests the authentication service's behavior when login credentials are incorrect.
+   * It uses Mockito to mock the user service and password encoder, returning a user
+   * with an incorrect password. The test asserts that a `CredentialsIncorrectException`
+   * is thrown when attempting to login with the incorrect credentials.
    */
   @Test
   void loginCredentialsAreIncorrect() {
@@ -117,22 +119,26 @@ public class AuthenticationSDJpaServiceTest {
   }
 
   /**
-   * Creates a new instance of `LoginRequest` and sets its email to `USER_EMAIL` and
-   * password to `REQUEST_PASSWORD`.
+   * Returns a pre-configured `LoginRequest` object with email set to `USER_EMAIL` and
+   * password set to `REQUEST_PASSWORD`.
+   * This function initializes a new `LoginRequest` object and sets its properties
+   * before returning the object.
    *
-   * @returns an instance of `LoginRequest` with email set to `USER_EMAIL` and password
-   * set to `REQUEST_PASSWORD`.
+   * @returns a `LoginRequest` object with email and password set to `USER_EMAIL` and
+   * `REQUEST_PASSWORD` respectively.
    */
   private LoginRequest getDefaultLoginRequest() {
     return new LoginRequest().email(USER_EMAIL).password(REQUEST_PASSWORD);
   }
 
   /**
-   * Constructs and returns a `UserDto` object with predefined attributes: `userId`,
-   * `name`, `email`, and `encryptedPassword`. It initializes an empty `communityIds`
-   * set. The function uses a builder pattern to create the `UserDto` object.
+   * Returns a UserDto object with predefined attributes, including userId, name, email,
+   * and encrypted password, and an empty set of communityIds. The values are likely
+   * defined as constants (USER_ID, USERNAME, USER_EMAIL, USER_PASSWORD). The object
+   * is created using a builder pattern.
    *
-   * @returns a `UserDto` object with default user attributes.
+   * @returns a `UserDto` object with default user data, including a user ID, name,
+   * email, and encrypted password.
    */
   private UserDto getDefaultUserDtoRequest() {
     return UserDto.builder()
@@ -145,14 +151,14 @@ public class AuthenticationSDJpaServiceTest {
   }
 
   /**
-   * Generates a default JWT token for a given user,
-   * with a lifetime specified by the `TOKEN_LIFETIME` constant,
-   * and an expiration time set to the current time plus the token lifetime.
+   * Generates a default JWT token based on a provided `UserDto`. It sets the token's
+   * expiration time to the current time plus a predefined `TOKEN_LIFETIME`. The token
+   * is then built with the user's ID.
    *
-   * @param userDto user data, specifically the user ID, which is used to populate the
-   * `userId` field of the `AppJwt` instance.
+   * @param userDto user data, specifically containing the user ID, which is used to
+   * construct the JWT token.
    *
-   * @returns an AppJwt object containing user's ID and a timestamp for expiration.
+   * @returns an AppJwt object with a user ID and an expiration time.
    */
   private AppJwt getDefaultJwtToken(UserDto userDto) {
     final LocalDateTime expirationTime = LocalDateTime.now().plus(TOKEN_LIFETIME);

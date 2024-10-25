@@ -25,19 +25,25 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 /**
- * Handles exceptions related to file uploads.
+ * Handles exceptions related to file uploads, providing custom error responses for
+ * MaxUploadSizeExceededException and IOException. It returns HTTP status codes and
+ * error messages to the client. The class uses Spring's @ControllerAdvice annotation
+ * to globally handle exceptions.
  */
 @ControllerAdvice
 public class FileUploadExceptionAdvice {
 
   /**
-   * Handles MaxUploadSizeExceededException exceptions,
-   * returns a ResponseEntity with a 414 status code and a JSON body containing an error
-   * message.
+   * Handles MaxUploadSizeExceededException exceptions by returning a HTTP response
+   * with a 414 status code and a JSON body containing an error message. The error
+   * message indicates that the file size exceeds the specified limit. It provides a
+   * clear error response to the client.
    *
-   * @param exc exception thrown when the file size exceeds the maximum allowed size.
+   * @param exc MaxUploadSizeExceededException thrown by the server, providing information
+   * about the file size limit exceeded.
    *
-   * @returns a ResponseEntity with a 414 status code and a JSON body containing a message.
+   * @returns a ResponseEntity with a status code of PAYLOAD_TOO_LARGE and a JSON body
+   * containing a message.
    */
   @ExceptionHandler(MaxUploadSizeExceededException.class)
   public ResponseEntity handleMaxSizeException(MaxUploadSizeExceededException exc) {
@@ -47,13 +53,14 @@ public class FileUploadExceptionAdvice {
   }
 
   /**
-   * Handles IOException exceptions, specifically MaxUploadSizeExceededException, and
-   * returns a ResponseEntity with a status code of HttpStatus.CONFLICT and a JSON body
-   * containing an error message.
+   * Handles IOException exceptions by returning a 409 Conflict HTTP response with a
+   * message indicating a problem with document saving.
    *
-   * @param exc exception that triggered the exception handler, specifically a `MaxUploadSizeExceededException`.
+   * @param exc MaxUploadSizeExceededException exception that was thrown when the maximum
+   * upload size was exceeded.
    *
-   * @returns a ResponseEntity with HTTP status 409 and a JSON body containing a "message".
+   * @returns a ResponseEntity with a status of 409 Conflict and a HashMap containing
+   * a message.
    */
   @ExceptionHandler(IOException.class)
   public ResponseEntity handleIOException(MaxUploadSizeExceededException exc) {

@@ -34,10 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * Provides REST endpoints for managing house member documents, including retrieval,
- * upload, update, and deletion. It interacts with the HouseMemberDocumentService to
- * perform document operations. The controller returns HTTP responses based on the
- * outcome of these operations.
+ * REST Controller which provides endpoints for managing house member documents
  */
 @RestController
 @Slf4j
@@ -47,12 +44,15 @@ public class HouseMemberDocumentController implements DocumentsApi {
   private final HouseMemberDocumentService houseMemberDocumentService;
 
   /**
-   * Retrieves a house member document based on the provided member ID, and returns a
-   * HTTP response with the document content if found, or a 404 status if not found.
+   * Returns a HTTP response containing a house member document in JPEG format.
+   * It retrieves the document by memberId from the service layer.
+   * If the document is not found, a 404 Not Found response is returned.
    *
-   * @param memberId identifier of the house member whose document is being requested.
+   * @param memberId identifier for the house member document to be retrieved and is
+   * used by the `houseMemberDocumentService` to find the corresponding document.
    *
-   * @returns a JPEG image or a 404 error response.
+   * @returns a ResponseEntity containing the house member document or an empty response
+   * with 404 status.
    */
   @Override
   public ResponseEntity<byte[]> getHouseMemberDocument(@PathVariable String memberId) {
@@ -80,20 +80,23 @@ public class HouseMemberDocumentController implements DocumentsApi {
   }
 
   /**
-   * Handles a request to upload a document for a house member by a given ID. It creates
-   * a new document via the `houseMemberDocumentService` and returns a NO_CONTENT status
-   * if successful or a NOT_FOUND status if the member does not exist.
+   * Handles an HTTP request to upload a document for a house member, creating a new
+   * `HouseMemberDocument` entity and returning a `ResponseEntity` indicating success
+   * or a 404 error if the member is not found.
    *
-   * @param memberId identifier of a house member for whom a document is being uploaded.
+   * @param memberId identifier for a house member, used to create a new house member
+   * document.
    *
-   * @param memberDocument uploaded file containing the house member document.
+   * @param memberDocument file uploaded by the user as a part of the request.
    *
-   * Contain multiple properties, including name, original filename, content type, and
-   * byte array of the file.
+   * Deconstruct `memberDocument` to reveal its properties: MultipartFile.
    *
-   * @returns either a NO_CONTENT HTTP status or a NOT_FOUND HTTP status.
+   * @returns a ResponseEntity with either NO_CONTENT status or NOT_FOUND status based
+   * on the result of the database query.
    *
-   * Contain a HTTP status code, which can be either 204 (NO_CONTENT) or 404 (NOT_FOUND).
+   * The output is a `ResponseEntity` object, which has a status code that can be either
+   * `NO_CONTENT` or `NOT_FOUND`. The status code is determined by the presence or
+   * absence of a `HouseMemberDocument` in the database.
    */
   @Override
   public ResponseEntity uploadHouseMemberDocument(
@@ -108,15 +111,16 @@ public class HouseMemberDocumentController implements DocumentsApi {
   }
 
   /**
-   * Updates a house member document based on the provided member document and ID. It
-   * returns a no-content response if the update is successful, or a not-found response
-   * if the document does not exist.
+   * Updates a house member document based on the provided member ID and document,
+   * returns a NO_CONTENT response if updated successfully, or a NOT_FOUND response if
+   * the document is not found.
    *
-   * @param memberId identifier for the house member whose document is being updated.
+   * @param memberId identifier for the house member document to be updated.
    *
-   * @param memberDocument file to be uploaded for updating a house member's document.
+   * @param memberDocument file to be updated as a member document for the specified
+   * house member.
    *
-   * @returns a ResponseEntity with a status of either NO_CONTENT or NOT_FOUND.
+   * @returns either a 204 No Content response or a 404 Not Found response.
    */
   @Override
   public ResponseEntity updateHouseMemberDocument(
@@ -130,13 +134,14 @@ public class HouseMemberDocumentController implements DocumentsApi {
   }
 
   /**
-   * Handles a request to delete documents associated with a house member. It calls a
-   * service to perform the deletion and returns a 204 status if successful, a 404
-   * status if the documents do not exist.
+   * Handles deletion of house member documents based on a provided member ID. It calls
+   * the `houseMemberDocumentService` to perform the deletion and returns a HTTP response
+   * indicating success or failure.
    *
-   * @param memberId identifier for the house member document to be deleted.
+   * @param memberId identifier of the house member whose document is to be deleted.
    *
-   * @returns a ResponseEntity with either a 204 status (NO_CONTENT) or a 404 status (NOT_FOUND).
+   * @returns either a NO_CONTENT (204) response if the document is deleted or a NOT_FOUND
+   * (404) response otherwise.
    */
   @Override
   public ResponseEntity<Void> deleteHouseMemberDocument(@PathVariable String memberId) {

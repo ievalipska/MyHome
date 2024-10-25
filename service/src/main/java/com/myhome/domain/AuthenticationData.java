@@ -4,12 +4,11 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Represents a data container for authentication information, specifically storing
- * a JWT token and a user ID.
+ * Represents authentication data containing a JWT token and a user ID.
  *
- * - jwtToken (String): holds a string representing a JSON Web Token.
+ * - jwtToken (String): stores a JWT token.
  *
- * - userId (String): stores a user identifier.
+ * - userId (String): represents a unique identifier for a user.
  */
 @Getter
 @RequiredArgsConstructor

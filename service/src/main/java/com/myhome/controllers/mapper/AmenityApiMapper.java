@@ -24,8 +24,8 @@ import java.util.Set;
 import org.mapstruct.Mapper;
 
 /**
- * Provides data mapping functionality between Amenity and its related data transfer
- * objects.
+ * Provides a mapping interface between Amenity domain objects and their respective
+ * data transfer objects (DTOs) and response objects.
  */
 @Mapper
 public interface AmenityApiMapper {

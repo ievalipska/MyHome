@@ -27,8 +27,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
- * Extends JpaRepository and provides custom methods for retrieving User entities
- * with various attributes and relationships.
+ * Extends JpaRepository to provide data access and retrieval functionality for User
+ * entities, utilizing JPA and Spring Data.
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {

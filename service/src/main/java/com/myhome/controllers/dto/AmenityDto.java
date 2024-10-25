@@ -24,19 +24,20 @@ import lombok.NoArgsConstructor;
 import lombok.With;
 
 /**
- * Represents a data transfer object for amenities, encapsulating key attributes.
+ * Represents a data transfer object for amenity-related data, encapsulating essential
+ * attributes.
  *
- * - id (Long): is an identifier of type Long.
+ * - id (Long): is a unique identifier represented as a Long data type.
  *
- * - amenityId (String): represents a string identifier for an amenity.
+ * - amenityId (String): is a string representing the amenity ID.
  *
- * - name (String): is a string representing the name of an amenity.
+ * - name (String): represents the name of an amenity.
  *
- * - description (String): contains a string representing a description.
+ * - description (String): stores a string value.
  *
- * - price (BigDecimal): is of type BigDecimal.
+ * - price (BigDecimal): is a decimal value representing a monetary amount.
  *
- * - communityId (String): stores a string identifier.
+ * - communityId (String): represents a string identifier for a community.
  */
 @AllArgsConstructor
 @NoArgsConstructor

@@ -10,11 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Provides a RESTful API endpoint for deleting bookings based on amenity and booking
- * IDs.
- * It uses a BookingService to interact with the database and returns a response
- * indicating success or failure.
- * It implements the BookingsApi interface.
+ * Handles booking deletion requests and returns HTTP responses accordingly. It relies
+ * on the BookingService to perform the actual deletion. The class implements the
+ * BookingsApi interface.
  */
 @RestController
 @Slf4j
@@ -24,18 +22,16 @@ public class BookingController implements BookingsApi {
   private final BookingService bookingSDJpaService;
 
   /**
-   * Performs a deletion operation on a booking based on the provided `amenityId` and
-   * `bookingId`. It calls the `bookingSDJpaService` to delete the booking and returns
-   * a `ResponseEntity` with a status of NO_CONTENT if the deletion is successful, or
-   * NOT_FOUND if the booking is not found.
+   * Deletes a booking based on the provided `amenityId` and `bookingId`. If the booking
+   * is successfully deleted, it returns a 204 (NO_CONTENT) response; otherwise, it
+   * returns a 404 (NOT_FOUND) response indicating the booking was not found.
    *
-   * @param amenityId unique identifier of the amenity associated with the booking being
-   * deleted.
+   * @param amenityId identifier of the amenity associated with the booking being deleted.
    *
    * @param bookingId identifier of the booking to be deleted from the system.
    *
-   * @returns a ResponseEntity with a status code of either NO_CONTENT (200) or NOT_FOUND
-   * (404).
+   * @returns either a HTTP 204 (NO_CONTENT) response if the booking is deleted or a
+   * 404 (NOT_FOUND) response otherwise.
    */
   @Override
   public ResponseEntity<Void> deleteBooking(@PathVariable String amenityId,

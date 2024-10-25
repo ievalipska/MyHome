@@ -3,8 +3,8 @@ package com.myhome.controllers.exceptions;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * Extends AuthenticationException to represent authentication failure due to incorrect
- * user credentials.
+ * Extends the AuthenticationException Class to represent a custom exception for
+ * incorrect credentials.
  */
 @Slf4j
 public class CredentialsIncorrectException extends AuthenticationException {
