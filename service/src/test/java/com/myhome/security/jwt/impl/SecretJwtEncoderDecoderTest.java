@@ -24,8 +24,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * This class tests the functionality of a SecretJwtEncoderDecoder class through unit
- * tests, covering successful and failed encoding and decoding of JSON Web Tokens (JWTs).
+ * Contains unit tests for encoding and decoding JSON Web Tokens (JWTs) using a secret
+ * key.
  */
 class SecretJwtEncoderDecoderTest {
   private static final String TEST_USER_ID = "test-user-id";
@@ -42,10 +42,9 @@ class SecretJwtEncoderDecoderTest {
       + "secretsecretsecretsecretsecretsecretsecretsecret";
 
   /**
-   * Encodes an AppJwt object using a SecretJwtEncoderDecoder instance with a valid
-   * secret, verifying that a non-null encoded token is returned.
-   * The AppJwt object is built with a user ID and an expiration time set to the current
-   * date and time.
+   * Tests the successful encoding of a JWT. It creates a `SecretJwtEncoderDecoder`
+   * instance, builds a `AppJwt` object, and asserts that the `encode` method returns
+   * a non-null value when provided with a valid secret key.
    */
   @Test
   void jwtEncodeSuccess() {
@@ -61,10 +60,8 @@ class SecretJwtEncoderDecoderTest {
 
   /**
    * Tests the behavior of a SecretJwtEncoderDecoder when encoding a JWT with an invalid
-   * secret key. It uses an assertion to verify that a WeakKeyException is thrown when
-   * the encode method is called with the invalid secret key. The test setup includes
-   * a SecretJwtEncoderDecoder instance and an AppJwt object created with a valid user
-   * ID.
+   * secret key. It asserts that a WeakKeyException is thrown upon encoding. The function
+   * verifies the exception handling of the encoder.
    */
   @Test
   void jwtEncodeFailWithException() {
@@ -78,9 +75,9 @@ class SecretJwtEncoderDecoderTest {
   }
 
   /**
-   * Tests a successful JWT decoding process. It creates a JWT, decodes it with a secret
-   * key, and verifies that the decoded object contains the expected user ID and
-   * expiration time.
+   * Verifies successful decoding of a JWT token. It encodes a test JWT with a secret
+   * key, decodes it back, and asserts that the decoded token matches the original
+   * token's user ID and expiration.
    */
   @Test
   void jwtDecodeSuccess() {
@@ -100,8 +97,10 @@ class SecretJwtEncoderDecoderTest {
   }
 
   /**
-   * Verifies that a JWT decoder throws an `ExpiredJwtException` when attempting to
-   * decode an expired JWT token with a valid secret key.
+   * Verifies that a SecretJwtEncoderDecoder instance throws an ExpiredJwtException
+   * when attempting to decode an expired JWT token. This is done by calling the decode
+   * method with an expired JWT token and a valid secret. The test expects an exception
+   * to be thrown.
    */
   @Test
   void jwtDecodeFailWithExpiredJwt() {
